@@ -1,74 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <title>Super Gestão - Contato</title>
-        <meta charset="utf-8">
-        
-        <link rel="stylesheet" href="{{ asset('css/estilo_basico.css') }}">
-    </head>
+@extends('site.layouts.basico') {{-- Comando utilizado para determinar qual template sera utilizado na view--}}
 
-    <body>
-        <div class="topo">
+@section('titulo', 'Contato') {{-- Nesse exemplo o comando section foi utilizado para definir o titulo da página, não sendo necessario fechar o bloco section --}}
+                              {{-- O primeiro parametro se refere a seção que esta presente no layout, o segundo se refere ao titulo da página   --}}
 
-            <div class="logo">
-                <img src="{{ asset('img/logo.png')}}">
-            </div>
+@section('conteudo')  {{-- Comando utilizado para envio dos blocos de codigo html para o template extendido --}}
+    <div class="topo">
 
-            <div class="menu">
-                <ul>
-                    <li><a href="{{ route('principal') }}">Principal</a></li>
-                    <li><a href="{{ route('sobreNos') }}">Sobre Nós</a></li>
-                    <li><a href="{{ route('contato') }}">Contato</a></li>
-                </ul>
-            </div>
+        <div class="logo">
+            <img src="{{ asset('img/logo.png')}}">
         </div>
 
-        <div class="conteudo-pagina">
-            <div class="titulo-pagina">
-                <h1>Entre em contato conosco</h1>
-            </div>
+        <div class="menu">
+            <ul>
+                <li><a href="{{ route('principal') }}">Principal</a></li>
+                <li><a href="{{ route('sobreNos') }}">Sobre Nós</a></li>
+                <li><a href="{{ route('contato') }}">Contato</a></li>
+            </ul>
+        </div>
+    </div>
 
-            <div class="informacao-pagina">
-                <div class="contato-principal">
-                    <form>
-                        <input type="text" placeholder="Nome" class="borda-preta">
-                        <br>
-                        <input type="text" placeholder="Telefone" class="borda-preta">
-                        <br>
-                        <input type="text" placeholder="E-mail" class="borda-preta">
-                        <br>
-                        <select class="borda-preta">
-                            <option value="">Qual o motivo do contato?</option>
-                            <option value="">Dúvida</option>
-                            <option value="">Elogio</option>
-                            <option value="">Reclamação</option>
-                        </select>
-                        <br>
-                        <textarea class="borda-preta">Preencha aqui a sua mensagem</textarea>
-                        <br>
-                        <button type="submit" class="borda-preta">ENVIAR</button>
-                    </form>
-                </div>
-            </div>  
+    <div class="conteudo-pagina">
+        <div class="titulo-pagina">
+            <h1>Entre em contato conosco</h1>
         </div>
 
-        <div class="rodape">
-            <div class="redes-sociais">
-                <h2>Redes sociais</h2>
-                <img src="{{ asset('img/facebook.png')}}">
-                <img src="{{ asset('img/linkedin.png')}}">
-                <img src="{{ asset('img/youtube.png')}}">
+        <div class="informacao-pagina">
+            <div class="contato-principal">
+                <form>
+                    <input type="text" placeholder="Nome" class="borda-preta">
+                    <br>
+                    <input type="text" placeholder="Telefone" class="borda-preta">
+                    <br>
+                    <input type="text" placeholder="E-mail" class="borda-preta">
+                    <br>
+                    <select class="borda-preta">
+                        <option value="">Qual o motivo do contato?</option>
+                        <option value="">Dúvida</option>
+                        <option value="">Elogio</option>
+                        <option value="">Reclamação</option>
+                    </select>
+                    <br>
+                    <textarea class="borda-preta">Preencha aqui a sua mensagem</textarea>
+                    <br>
+                    <button type="submit" class="borda-preta">ENVIAR</button>
+                </form>
             </div>
-            <div class="area-contato">
-                <h2>Contato</h2>
-                <span>(11) 3333-4444</span>
-                <br>
-                <span>supergestao@dominio.com.br</span>
-            </div>
-            <div class="localizacao">
-                <h2>Localização</h2>
-                <img src="{{ asset('img/mapa.png')}}">
-            </div>
+        </div>  
+    </div>
+
+    <div class="rodape">
+        <div class="redes-sociais">
+            <h2>Redes sociais</h2>
+            <img src="{{ asset('img/facebook.png')}}">
+            <img src="{{ asset('img/linkedin.png')}}">
+            <img src="{{ asset('img/youtube.png')}}">
         </div>
-    </body>
-</html>
+        <div class="area-contato">
+            <h2>Contato</h2>
+            <span>(11) 3333-4444</span>
+            <br>
+            <span>supergestao@dominio.com.br</span>
+        </div>
+        <div class="localizacao">
+            <h2>Localização</h2>
+            <img src="{{ asset('img/mapa.png')}}">
+        </div>
+    </div>
+@endsection {{-- Comando utilizado para fechar o bloco de codigo section --}}
