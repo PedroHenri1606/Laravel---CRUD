@@ -121,3 +121,62 @@ Exemplo:                       <li><a href="{{ route('principal') }}">Principal<
 
 Estudar Tinker e Eloquent ORM
 
+Metodos Tinker
+
+Metodo use = Com o metodo use, é possivel acessar uma tabela no banco de dados
+Exemplo: use \App\Models\NomeModel
+
+Metodo create = Com o metodo create, é possivel fazer o envio de dados direto para o banco de dados
+Exemplo: \App\Models\NomeModel:: create(['dados aqui em array associativo']);	
+
+Metodo all() = Com o metodo all, é possivel retornar todos os registros de dados presente na tabela associada ao modelo.
+Exemplo: $nomeVariavel = \App\Models\NomeModel::all(); 
+
+Metodo find() = Com o metodo find, é possivel retornar um ou mais registros do banco de dados, buscando pela primaray key desse registro
+Exemplo: $nomeVariavel = \App\Models\NomeModel:find(1);  //caso a primary key dele seja um id, ira buscar o id 1 na tabela 
+
+Metodo where() = Com o metodo where, é possivel retornar vários registro do banco de dados atraves de uma condição
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::where('coluna','condicao',valor)
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel:where('coluna','condicao',valor)->get();
+
+Metodo whereIn() = Com o metodo whereIn, é possivel retornar vários registros do banco de dados atráves de uma condição especifica = Ira retornar os valores 1 e 3
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereIn('coluna_a_ser_comparada_por_igual','conjunto_de_parametros');
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereIn('coluna_a_ser_comparada_por_igual','conjunto_de_parametros')->get();
+Exemplo pratico: $contatos = /App/Models/SiteContato::whereIn('motivo_contato',[1,3])->get();
+
+Metodo whereNotIn() = Com o metodo whereNotIn, é possivel retornar vários registros do banco de dados atráves de uma condição especifica = Ira retornar todos menos os valores 1 e 3
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereNotIn('coluna_a_ser_comparada_por_igual','conjunto_de_parametros');
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereNotIn('coluna_a_ser_comparada_por_igual','conjunto_de_parametros')->get();
+Exemplo pratico: $contatos = \App\Models\SiteContato::whereNotIn('motivo_contato',[1,3])->get();
+
+Metodo whereBetween() = Com o metodo whereBetweeen, é possivel retornar vários registros do banco de dados atráves de um intervalor especifico = Ira retornar todos do intervalor entre 1 e 3
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereBetween('coluna', 'conjunto de parametros');
+Exemplo de retorno Collection: $nomeVarivel = \App\Models\NomeModel::whereBetween('coluna', 'conjunto de parametros')->get();
+Exemplo pratico: $contatos = \App\Models\NomeModel::whereBetween('id', [1,3])->get(); 
+
+Metodo whereNotBetween() = Com o metodo whereNotBetween, é possivel retornar vários registros do banco de dados atráves de um intervalo especifico = Ira retoranar o intervalor de todos menos o 1 e 3 
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereNotBetween('coluna', 'conjunto de parametros');
+Exemplo de retorno Collection: $nomeVarivel = \App\Models\NomeModel::whereNotBetween('coluna', 'conjunto de parametros')->get();
+Exemplo pratico: $contatos = \App\Models\NomeModel::whereNotBetween('id', [1,3])->get();
+
+Metodo whereNull() = Com o metodo whereNull, é possivel retornar vários registros do banco que possuem colunas vazias (Null)
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereNull('coluna');
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereNull('coluna')->get();
+Exemplo pratico: $contatos = \App\Models\SiteContato::whereNull('updated_at')->get();
+
+Metodo whereNull() = Com o metodo whereNotNull, é possivel retornar vários registros do banco que não possuem colunas vazias (Null)
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereNotNull('coluna');
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereNotNull('coluna')->get();
+Exemplo pratico: $contatos = \App\Models\SiteContato::whereNotNull('updated_at')->get();
+
+Metodo whereDate() = Com o metodo whereDate, é possivel retornar vários registros do banco de dados atráves de condições de datas
+Exemplo de retorno Builder: $nomeVariavel =  \App\Models\NomeModel::whereDate('coluna', data);
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereDate('coluna', data)->get();
+Exemplo de retorno pratico: $contatos = \App\Models\SiteContato::whereDate('created_at', '2024-03-18')->get();
+
+
+Utilizando vários metodos where dentro de uma consulta where // Retorna os dados se todas as condições forem verdadeiras
+Exemplo pratico: $contatos = \App\Models\SiteContato::where('nome', '<>', 'Fernando')->whereIn('motivo_contato', [1,2])->whereBetween('created_at', ['2024-03-18 00:00:00', '2024-03-19 00:00:00'])->get();
+
+Utilizando vários metodos orWhere // Retorna os dados se todos ou uma condição for verdadeira (sempre usar o orWhere a esquerda)
+Exemplo pratico: $contatos = \App\Models\SiteContato::where('nome', '<>', 'Fernando')->orWhereIn('motivo_contato', [1,2])->orWhereBetween('created_at', ['', '2024-03-19 00:00:00'])->get();

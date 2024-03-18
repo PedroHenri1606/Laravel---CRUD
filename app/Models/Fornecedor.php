@@ -11,5 +11,5 @@ class Fornecedor extends Model
 
     //Correção do Eloquent ORM
     protected $table = 'fornecedores';
-    
+    protected $fillable = ['nome','site','uf','email'];  //Variavel que faz a autorização de manipulação das variaveis pelo tinker. 
 }
