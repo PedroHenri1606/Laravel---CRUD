@@ -11,6 +11,7 @@ Criação das seeders = php artisan make:seeder NomeSeeder
 
 Execução das migrations = php artisan migrate
 Execução rollback migrations = php artisan migrate:rollback --step= (quantidade de passos)
+Execução das seeders = php artisan db:seed
 
 Verificação do status das migrations = php artisan migrate:status
 
