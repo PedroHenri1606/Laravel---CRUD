@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Fornecedor extends Model
 {
     use HasFactory;
+
+    //Correção do Eloquent ORM
+    protected $table = 'fornecedores';
+    
 }

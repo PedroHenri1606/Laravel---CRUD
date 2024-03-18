@@ -39,7 +39,7 @@ return new class extends Migration
         //Remover o relacionamento com a tabela produtos
         Schema::table('produtos', function(Blueprint $table){
             //Remover a fk
-            $table->dropForeign('produtos_unidade_id_foreign)');
+            $table->dropForeign('produtos_unidade_id_foreign');
             //Remover a coluna
             $table->dropColumn('unidade_id');
         });
@@ -47,7 +47,7 @@ return new class extends Migration
         //Remover o relacionamento com a tabela produtos_detalhes
         Schema::table('produto_detalhes', function(Blueprint $table){
             //Remover a fk
-            $table->dropForeign('produtos_detalhes_unidade_id_foreign)');
+            $table->dropForeign('produto_detalhes_unidade_id_foreign');
             //Remover a coluna
             $table->dropColumn('unidade_id');
         });

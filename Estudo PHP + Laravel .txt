@@ -1,0 +1,123 @@
+Estudo PHP + Laravel 
+
+##Comandos de criação do projeto e arquivos##
+
+Criação do projeto: composer create-project laravel/laravel:^10.0 nomeProjeto
+Criação do controller: php artisan make:controller NomeController
+Criação do model = php artisan make:model NomeModel
+Criação do model e migration = php artisan make:model NomeModel -m
+Criação da migration = php artisan make:migration metodo_nome_migration
+Execução das migrations = php artisan migrate
+Execução rollback migrations = php artisan migrate:rollback --step= (quantidade de passos)
+Verificação do status das migrations = php artisan migrate:status
+Reverter todas as migrates do banco = php artisan migrate:reset
+Reverter todas as migrates e executar todas as migrates novamente = php artisan migrate:refresh
+Faz o drop de todos os objetos do banco e executa as migrates novamente = php artisan migrate:fres
+Entrar dentro do painel do tinker = php artisan tinker
+
+
+Iniciar banco de dados: php -S localhost:3000
+Iniciar aplicação artisan: php artisan serve
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+##Pastas do projeto##
+
+public = aqui deve ficar todos os arquivos que podem ser acessados de qualquer parte do projeto, fotos, videos, arquivos de áudio...
+routes = aqui é onde é configurado todas as rotas da aplicação
+resources = aqui é onde a parte visual do projeto vai ser configurada
+app = aqui é onde vai ser configurado os controllers e models do projeto (parte back-end)
+database = aqui é onde vai ser configurado as migration e a factory do banco de dados
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+##Operador ternario##
+
+condição ? se verdade : se falso
+Exemplo: isset($fornecedores[1]['cnpj]) ? 'CNPJ informado' : 'CNPJ não informado';
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+##Variaveis e objetos##
+
+$loop = ao utilizar os loops foreach e forelse, o Blade disponibiliza o objeto loop, com esse objeto, é possivel ter acesso a vários tipos de dados do loop, como numero de iterações, se é a primeira ou ultima, para saber mais use: @dd($loop)
+
+$slot = essa variavel é responsavel por definir onde sera renderizado todo o parametro HTML incluido dentro do bloco de código component gerado na view, 
+use: {{ $slot }}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+##Funções PHP##
+
+assets = tudo que é anexo a uma página html é um asset (imagens, sons, videos, fontes, css e js)
+Exemplo:                       <img src="{{ asset('img/mapa.png')}}">
+
+route = função que retorna a rota que o usuario sera enviado, nessa função, você pode atribuir a roda pelo nome dado a ela 
+Exemplo:                       <li><a href="{{ route('principal') }}">Principal</a></li>
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+##Comandos##
+
+{{-- --}} = Comentário no blade
+
+@if( ) = Comando de if do blade, inicio de condição
+
+@endif = Comando usando para fechar o bloco da condição if
+
+@elseif( ) = Comando utilizado para iniciar outra condição no if, não precisa de fechamento
+
+@else = Comando para iniciar ultima condição do if, não precisa de fechamento
+
+@unless( ) = Comando para inicio de condição, porem ela só sera executada se a condição for falsa.
+
+@isset( ) = Comando para verificar se a variavel foi instanciada, se os dados estão setados dentro dela, caso não esteja, não interrompe o funcionamento da aplicação, pode ser usado também dentro de loops verificando se se o item de um array existe por exemplo, e se existir gerar o loop, inicio da condição
+
+@endisset = Comando usado para a fechar o bloco da condição isset
+
+@empty( ) = Comando para verificar se uma variavel está vazia, em PHP, uma variavel pode ser considerada vazia de várias formas, não precisa de fechamento
+
+@switch( ) = Comando para iniciar condição por valor variavel, caso o valor variavel seja igual ao valor de um case, esse case sera executado
+
+@case( ) = Comando que recebera as instruções de execução
+
+@break = Comando para finalizar instruções do case, com isso a condição switch é finalizado
+
+@endswitch = Comando usado para fechar o bloco de condição switch
+
+@for( ) = Comando usado para criar um loop onde você sabe a quantidade de vezes que ele deve ser executado
+
+@endfor = Comando usado para fechar o bloco de loop for
+
+@while( ) = Comando usado para criar um loop de enquanto a instrução for verdadeira
+
+@endwhile = Comando usado para fechar o bloco de loop while
+
+@foreach( ) = Comando usado para criar um loop de array, com ele, percorrer arrays fica muito mais simples
+
+@endforeach = Comando usado para fechar o bloco de loop foreach
+
+@forelse( ) = Comando semelhante ao loop foreach, porem, leva com ele a instrução de caso o array esteja vazio, execute outra instrução
+
+@endforelse = Comando usado para fechar o bloco de loop forelse
+
+@extends( ) = Comando utilizado para determinar a template que sera utilizada na view 
+
+@section( ) = Comando utilizado para envio dos blocos de codigo html para o template extendido
+
+@endsection = Comando utilizado para fechar o bloco de código section
+
+@yield( ) = Comando utilizado para indicar para o template extendido, onde os blocos html das sections devem ser renderizados
+
+@include( ) = Comando utilizado para fazer a inclusão direta de um bloco de código no arquivo
+
+@csrf = Comando utilizado para criar token CSRF, é um mecanismo de segurança usado para proteger aplicativos da Web contra ataques CSRF.
+
+@component( ) = Comando utilizado para gerar um componente para ser utilizado nas views, diferente do comando include, um component, pode receber parametros html, esses parametros sendo renderizados atráves da variavel $slot dentro dos arquivos do component
+
+@endcomponent = Comando utilizado para fechar o o bloco de código component
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Estudar Tinker e Eloquent ORM
+
