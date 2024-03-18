@@ -7,14 +7,19 @@ Criação do controller: php artisan make:controller NomeController
 Criação do model = php artisan make:model NomeModel
 Criação do model e migration = php artisan make:model NomeModel -m
 Criação da migration = php artisan make:migration metodo_nome_migration
+Criação das seeders = php artisan make:seeder NomeSeeder
+
 Execução das migrations = php artisan migrate
 Execução rollback migrations = php artisan migrate:rollback --step= (quantidade de passos)
+
 Verificação do status das migrations = php artisan migrate:status
+
 Reverter todas as migrates do banco = php artisan migrate:reset
 Reverter todas as migrates e executar todas as migrates novamente = php artisan migrate:refresh
-Faz o drop de todos os objetos do banco e executa as migrates novamente = php artisan migrate:fres
-Entrar dentro do painel do tinker = php artisan tinker
 
+Faz o drop de todos os objetos do banco e executa as migrates novamente = php artisan migrate:fres
+
+Entrar dentro do painel do tinker = php artisan tinker
 
 Iniciar banco de dados: php -S localhost:3000
 Iniciar aplicação artisan: php artisan serve
@@ -119,7 +124,7 @@ Exemplo:                       <li><a href="{{ route('principal') }}">Principal<
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Estudar Tinker e Eloquent ORM
+Tinker e Eloquent ORM
 
 Metodos Tinker
 
@@ -169,14 +174,74 @@ Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereNotNull(
 Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereNotNull('coluna')->get();
 Exemplo pratico: $contatos = \App\Models\SiteContato::whereNotNull('updated_at')->get();
 
-Metodo whereDate() = Com o metodo whereDate, é possivel retornar vários registros do banco de dados atráves de condições de datas
+Metodo whereDate() = Com o metodo whereDate, é possivel retornar vários registros do banco de dados atráves de condições de datas (também é possivel buscar por dias, usando whereDay, buscar por anos, usando whereYear, buscar por meses usando whereMouth)
 Exemplo de retorno Builder: $nomeVariavel =  \App\Models\NomeModel::whereDate('coluna', data);
 Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereDate('coluna', data)->get();
 Exemplo de retorno pratico: $contatos = \App\Models\SiteContato::whereDate('created_at', '2024-03-18')->get();
 
+Metodo whereTime() = Com o metodo whereTime, é possivel retornar vários registros do banco de dados atráves de condições de horarios
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereTime('coluna', 'operador', 'horario');
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereTime('coluna', 'operador', 'horario');
+Exemplo de retorno pratico: $contatos = \App\Models\SiteContato::whereTime('created_at', '=', '10:44:00')->get();
+
+Metodo whereColumn() = Com o metodo whereColumn, é possivel retornar vários registros do banco de dados atráves da comparação entre colunas
+Exemplo de retorno Builder: $nomeVariavel = \App\Models\NomeModel::whereColumn('coluna1', 'operador', 'coluna2');
+Exemplo de retorno Collection: $nomeVariavel = \App\Models\NomeModel::whereColumn('coluna', 'operador', 'coluna2')->get();
+Exemplo de retorno pratico: $contatos = \App\Models\NomeModel::whereColumn('created_at', '<>', 'updated_at')->get();
 
 Utilizando vários metodos where dentro de uma consulta where // Retorna os dados se todas as condições forem verdadeiras
 Exemplo pratico: $contatos = \App\Models\SiteContato::where('nome', '<>', 'Fernando')->whereIn('motivo_contato', [1,2])->whereBetween('created_at', ['2024-03-18 00:00:00', '2024-03-19 00:00:00'])->get();
 
 Utilizando vários metodos orWhere // Retorna os dados se todos ou uma condição for verdadeira (sempre usar o orWhere a esquerda)
 Exemplo pratico: $contatos = \App\Models\SiteContato::where('nome', '<>', 'Fernando')->orWhereIn('motivo_contato', [1,2])->orWhereBetween('created_at', ['', '2024-03-19 00:00:00'])->get();
+
+Utilizando precedência em operações lógicas // Gerar uma ordem de execução das condições    
+Exemplo de retorno pratico: 
+$nomeVariavel = \App\Models\NomeModel::where(function($query){ $query->where('nome', 'Jorge')->orWhere('nome','Ana'); })
+					->where(function($query){$query->whereIn('motivo_contato', [1,2])->orWhereBetween('id', [4,6); })->get(); 
+
+Metodo orderBy() = Com o metodo orderBy, é possivel fazer ordenação dos indices da tabela por coluna e ordem crescente ou decrescente 
+Exemplo de retorno pratico: $contatos = \App\Models\SiteContato::orderBy('nome','asc')->get();
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//Manipulação e metodos Collections 
+
+você sempre vai fazer o comando pelo nome da Model, você pode selecionar quais indices ou se todos os indices vão ser manipulados 
+Exemplo: SiteContato::all();
+
+all(); = retorna todos os indices da collection
+
+first(); = retorna o primeiro indice da collection
+
+last(); = retorna o ultimo indice da collection
+
+reverse(); = inverte a ordem dos indices dentro da collection
+
+toArray(); = converte a collection em um objeto do tipo array
+
+toJson(); = converte a coleection em um objeto do tipo json
+
+pluck(); = retorna a coluna selecionada de todos os indices da collection, 2 parametros, um para o valor do indice, o segundo para o nome do indice 
+Exemplo: SiteContato::all()->pluck('email','nome');
+
+fill(); = envia dados para o objeto atráves de um array associativo 
+
+save(); = persisti os dados enviados no método fill para o banco de dados
+
+update(); = altera e persisti os indices passados por parametro para o banco de dados, não precisa do método save(); para persistir os dados
+
+delete(); = deleta o indice no banco de dados, não precisa de parametro, é passado pela variavel que inicia o comando
+
+destroy(); = deleta o indice no banco de dados, precisa ser passado o indice por parametro
+
+forceDelete(); = apos a implementação do softDelete, para realmente apagar o registro de dados no banco, sera necessário no tinker, esse método não precisa de parametro, ele é passado pela variavel que inicia o comando
+
+onlyTrashed(); = retorna somente todos os indices do banco de dados que possuem o deleted_ad preenchidos
+
+restore(); = apaga o registro de deleted_at no banco, ativando novamente o registro no banco de dados, esse método não precisa de parametro, ele é passado pela variavel que inicia o comando
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Estudar Traits
