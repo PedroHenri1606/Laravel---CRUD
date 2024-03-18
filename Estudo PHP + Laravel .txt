@@ -8,6 +8,7 @@ Criação do model = php artisan make:model NomeModel
 Criação do model e migration = php artisan make:model NomeModel -m
 Criação da migration = php artisan make:migration metodo_nome_migration
 Criação das seeders = php artisan make:seeder NomeSeeder
+Criação das factory = php artisan make:factory NomeFactory
 
 Execução das migrations = php artisan migrate
 Execução rollback migrations = php artisan migrate:rollback --step= (quantidade de passos)
