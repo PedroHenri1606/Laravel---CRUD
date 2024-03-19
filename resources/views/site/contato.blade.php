@@ -11,12 +11,12 @@
 
         <div class="informacao-pagina">
             <div class="contato-principal"> 
-                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta', '$motivo_contatos' => $motivo_contatos]) 
-                                                                                                                      {{-- Comando utilizado para gerar um componente para ser 
-                                                                                                                           utilizado nas views, diferente do método include, um
-                                                                    criado um array associativo                            Componente, pode receber parametros html, esses 
-                                                                    que sera usado como variavel                           parametros sendo renderizados atráves da variavel 
-                                                                    dentro do component                                    $slot dentro do componente --}}
+                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta', 'motivo_contatos' => $motivo_contatos]) 
+                                                                                                    {{-- Comando utilizado para gerar um componente para ser 
+                                                                                                         utilizado nas views, diferente do método include, um
+                                                                    criado um array associativo          Componente, pode receber parametros html, esses 
+                                                                    que sera usado como variavel         parametros sendo renderizados atráves da variavel 
+                                                                    dentro do component                  $slot dentro do componente --}}
                     <p> A nossa equipe analisara a sua mensagem, e retornaremos o mais breve possivel </p>
                     <p> Nosso tempo médio de resposta é de 48 horas </p>
                 @endcomponent
