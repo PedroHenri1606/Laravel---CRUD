@@ -13,7 +13,7 @@ Route::get('/', [\App\Http\Controllers\PrincipalController::class,'principal'])-
 
 //Rotas Contato
 Route::get('/contato', [\App\Http\Controllers\ContatoController::class,'contato'])->name('contato');
-Route::post('/contato', [\App\Http\Controllers\ContatoController::class,'contato'])->name('contato');
+Route::post('/contato', [\App\Http\Controllers\ContatoController::class,'salvar'])->name('contato');
 
 
 Route::get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('sobreNos');
