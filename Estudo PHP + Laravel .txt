@@ -9,6 +9,7 @@ Criação do model e migration = php artisan make:model NomeModel -m
 Criação da migration = php artisan make:migration metodo_nome_migration
 Criação das seeders = php artisan make:seeder NomeSeeder
 Criação das factory = php artisan make:factory NomeFactory
+Criação do middleware = php artisan make:middleware NomeMiddleware 
 
 Execução das migrations = php artisan migrate
 Execução rollback migrations = php artisan migrate:rollback --step= (quantidade de passos)
@@ -261,10 +262,13 @@ Estudar Traits
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Formularios
+##Formularios
 
-Objeto request = 
+Objeto request = Objeto que recebe todos os dados referente a requisição, para saber mais utilize dd($request->all());	
 
-Validation =
+Validation = Validação é um método feito no controller, esse método é responsavel por verificar se os atributos atingem os seus requisitos minimos, caso não atinja 
+é encaminhado uma mensagem de feedback ao usuario, informando como tratar o erro gerado.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+##Middlewares

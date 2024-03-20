@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*Comando de endereçamento de rotas 
@@ -9,14 +10,23 @@ use Illuminate\Support\Facades\Route;
     o nome da função que deve ser executada dentro do controlador
     o nome que foi atribuido a rota (boa pratica)
 */
-Route::get('/', [\App\Http\Controllers\PrincipalController::class,'principal'])->name('principal');
+
+//Com o middleware, antes de ser liberado a rota solicita, sera interceptado pelo middleware e manipulado conforme necessidade 
+Route::middleware(LogAcessoMiddleware::class)  // Estilo de criação 1
+    ->get('/', [\App\Http\Controllers\PrincipalController::class,'principal'])
+    ->name('principal');
 
 //Rotas Contato
-Route::get('/contato', [\App\Http\Controllers\ContatoController::class,'contato'])->name('contato');
+
+Route::get('/contato', [\App\Http\Controllers\ContatoController::class,'contato'])
+    ->name('contato')
+    ->middleware(LogAcessoMiddleware::class); //Estilo de criação 2
+
 Route::post('/contato', [\App\Http\Controllers\ContatoController::class,'salvar'])->name('contato');
 
-
-Route::get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('sobreNos');
+Route::middleware(LogAcessoMiddleware::class)
+    ->get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos'])
+    ->name('sobreNos');
 
 Route::get('/login', function(){ return 'login';})->name('login');
 
