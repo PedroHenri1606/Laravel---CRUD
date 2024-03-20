@@ -40,10 +40,10 @@ return new class extends Migration
             $table->integer('motivo_contato');
             //Retirando a foreign key da tabela - ao excluir uma foreign key, deve ser considerado como parametro (<nomeTabela>_<nomeColuna>_<foreign>)
             $table->dropForeign('site_contatos_motivo_contatos_id_foreign'); 
-
-            //Revertendo motivo_contatos_id para motivo_contato
-            DB::statement('update site_contatos set motivo_contato = motivo_contatos_id'); 
         });
+
+        //Revertendo motivo_contatos_id para motivo_contato
+        DB::statement('update site_contatos set motivo_contato = motivo_contatos_id'); 
 
         //Removendo a coluna motivo contatos id
         Schema::table('site_contatos', function (Blueprint $table) {

@@ -1,4 +1,4 @@
-    <form action={{ route('contato')}} method="post">
+        <form action={{ route('contato')}} method="post">
         @csrf  {{-- Comando usado para gerar token CSRF, criando uma barreira de segurança que evita ataques CSRF a aplicação--}}
         <input name ="nome" value="{{old('nome')}}" type="text" placeholder="Nome" class="{{ $classe }}"> 
         <br>
@@ -7,11 +7,11 @@
         <input name ="email" value="{{old('email')}}" type="text" placeholder="E-mail" class="{{ $classe }}"> {{-- Foi p assado a variação de estilo como parametro atráves de um array associativo 
                                                                                           gerado na view --}}
         <br>
-        <select name ="motivo_contato" class="{{ $classe }}">
+        <select name ="motivo_contatos_id" class="{{ $classe }}">
             <option value="">Qual o motivo do contato?</option> 
 
                 @foreach($motivo_contatos as $indice => $motivo_contato)
-                    <option value="{{$motivo_contato->id}}" {{ old('motivo_contato') == $motivo_contato->id ? 'selected' : ''}}>{{$motivo_contato->motivo_contato}}</option>
+                    <option value="{{$motivo_contato->id}}" {{ old('motivo_contatos_id') == $motivo_contato->id ? 'selected' : ''}}>{{$motivo_contato->motivo_contato}}</option>
                 @endforeach
         </select>
         <br>
