@@ -28,6 +28,17 @@ Iniciar aplicação artisan: php artisan serve
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+##Passo a passo para o que fazer ao clonar o repositorio
+
+1-Executar comando: composer install  ->  Ira baixar todas as bibliotecas necessarias do projeto
+2-Configurar novo arquivo env: ".env"  -> O projeto recem clonado ira vir somente com o ".env.example", que não sera interpretado pelo artisan, copie os dados e gere um novo arquivo
+3-Execute os comandos de migrate: php artisan migrate -> Assim você ira gerar todas as tabelas no banco de dados
+4-Execute o comando para repopoluar as tabelas no banco de dados: php artisan db:seed -> Algumas funcionalidades do seu sistema podem funcionar somente se tiver dados persistidos 
+dentro do banco.
+5-Inicie o projeto: php artisan serve  -> Apos efetuar todo o processo de configuração anterior, seu projeto esta pronto agora para ser iniciado no servidor local 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ##Pastas do projeto##
 
 public = aqui deve ficar todos os arquivos que podem ser acessados de qualquer parte do projeto, fotos, videos, arquivos de áudio...
