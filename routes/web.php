@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AutenticacaoMiddleware;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -31,10 +32,17 @@ Route::middleware(LogAcessoMiddleware::class)
 Route::get('/login', function(){ return 'login';})->name('login');
 
 //Comando prefix utilizado para gerar uma rota pai e endereçar rotas filhas levando o nome da rota pai no começo da uri
-Route::prefix('/app')->group(function() {
-    Route::get('/clientes', function(){ return 'Clientes';})->name('clientes');
-    Route::get('/fornecedores', [\App\Http\Controllers\FornecedorController::class, 'fornecedores'])->name('fornecedores');
-    Route::get('/produtos', function(){ return 'Produtos';})->name('produtos');
+Route::middleware('autenticacao:padrao,pedro') // Apos atribuir um apelido ao Middleware em /bootstrap/app.php, é passado o tipo de autenticação por parametro para o Middleware
+    ->prefix('/app')
+    ->group(function() {
+        Route::get('/clientes', function(){ return 'Clientes';})
+            ->name('clientes');
+
+        Route::get('/fornecedores', [\App\Http\Controllers\FornecedorController::class, 'fornecedores'])
+            ->name('fornecedores');
+
+        Route::get('/produtos', function(){ return 'Produtos';})
+            ->name('produtos');
 });
 
 Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class, 'teste'])->name('teste');
