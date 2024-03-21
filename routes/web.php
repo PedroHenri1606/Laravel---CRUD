@@ -23,29 +23,34 @@ Route::get('/contato', [\App\Http\Controllers\ContatoController::class,'contato'
     ->name('contato')
     ->middleware(LogAcessoMiddleware::class); //Estilo de criação 2
 
-Route::post('/contato', [\App\Http\Controllers\ContatoController::class,'salvar'])->name('contato');
+Route::post('/contato', [\App\Http\Controllers\ContatoController::class,'salvar'])
+    ->name('contato');
 
 Route::middleware(LogAcessoMiddleware::class)
     ->get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos'])
     ->name('sobreNos');
 
-Route::get('/login', function(){ return 'login';})->name('login');
+Route::get('/login/{erro?}', [\App\Http\Controllers\LoginController::class, 'index'])
+    ->name('site.login'); 
+Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar'])
+    ->name('site.login'); //boa pratica sempre colocar o nome do pacote que ela se encontra no começo do nome
 
 //Comando prefix utilizado para gerar uma rota pai e endereçar rotas filhas levando o nome da rota pai no começo da uri
 Route::middleware('autenticacao:padrao,pedro') // Apos atribuir um apelido ao Middleware em /bootstrap/app.php, é passado o tipo de autenticação por parametro para o Middleware
     ->prefix('/app')
     ->group(function() {
         Route::get('/clientes', function(){ return 'Clientes';})
-            ->name('clientes');
+            ->name('app.clientes');
 
         Route::get('/fornecedores', [\App\Http\Controllers\FornecedorController::class, 'fornecedores'])
-            ->name('fornecedores');
+            ->name('app.fornecedores');
 
         Route::get('/produtos', function(){ return 'Produtos';})
-            ->name('produtos');
+            ->name('app.produtos');
 });
 
-Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class, 'teste'])->name('teste');
+Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class, 'teste'])
+    ->name('teste');
 
 //Comando fallback é utilizado para a aplicação fazer o tratamento quando o usuario informar uma uri invalida
 Route::fallback(
