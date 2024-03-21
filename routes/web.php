@@ -39,14 +39,20 @@ Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar
 Route::middleware('autenticacao:padrao,pedro') // Apos atribuir um apelido ao Middleware em /bootstrap/app.php, é passado o tipo de autenticação por parametro para o Middleware
     ->prefix('/app')
     ->group(function() {
-        Route::get('/clientes', function(){ return 'Clientes';})
-            ->name('app.clientes');
+        Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])
+            ->name('app.home');
+        
+        Route::get('/sair', [\App\Http\Controllers\LoginController::class, 'sair'])
+            ->name('app.sair');
+        
+        Route::get('/cliente', [\App\Http\Controllers\ClienteController::class, 'index'])
+            ->name('app.cliente');
 
-        Route::get('/fornecedores', [\App\Http\Controllers\FornecedorController::class, 'fornecedores'])
-            ->name('app.fornecedores');
+        Route::get('/fornecedor', [\App\Http\Controllers\FornecedorController::class, 'fornecedores'])
+            ->name('app.fornecedor');
 
-        Route::get('/produtos', function(){ return 'Produtos';})
-            ->name('app.produtos');
+        Route::get('/produto', [\App\Http\Controllers\ProdutoController::class, 'index'])
+            ->name('app.produto');
 });
 
 Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class, 'teste'])
