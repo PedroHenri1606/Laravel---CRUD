@@ -41,12 +41,9 @@ class ContatoController extends Controller
 
             'telefone.required' => "Telefone é um campo obrigatorio!",
 
-
             'email.email' => "Informe um email valido!",
 
-
             'motivo_contatos_id.required' => "Motivo do contato é um campo obrigatorio!",
-
 
             'mensagem.required' => "Mensagem é um campo obrigatorio",
 
