@@ -36,7 +36,7 @@
                         <td>{{ $produto->peso}} kg</td>
                     </tr>
                     <tr>
-                        <td>Undiade de Medida:</td> 
+                        <td>Unidade de Medida:</td> 
                         <td>{{ $produto->unidade_id}}</td>
                     </tr>
                 </table>
