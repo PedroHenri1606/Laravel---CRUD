@@ -27,7 +27,8 @@ class FornecedorController extends Controller
     public function adicionar(Request $request){
         $msg ='';
 
-        if(request()->input('_token') != ''){
+        //verifica se não possui id, se não possuir, efetua o cadastro
+        if(request()->input('_token') != '' && request()->input('id') == ''){
             
             $validation = [
                 'nome'  => 'required|min:3|max:40',
@@ -54,6 +55,27 @@ class FornecedorController extends Controller
 
             $msg = "Cadastro realizado com sucesso!";
         }
+
+        //verifica se possui o id, se possuir, efetua a atualização dos dados
+        if(request()->input('_token') != '' && request()->input('id') != ''){
+            $fornecedor = Fornecedor::find($request->input('id'));
+            $update = $fornecedor->update($request->all());
+
+            if($update){
+                $msg = 'Update realizado com sucesso!';
+            } else {
+                $msg = 'Update apresentou problema!';
+            }
+
+            return redirect()->route('app.fornecedor.editar', ['id'=> $request->input('id'), 'msg' => $msg]);
+        }
+
         return view('app.fornecedor.adicionar', ['msg' => $msg]);
+    }
+
+    public function editar($id, $msg ='' ){
+        $fornecedor = Fornecedor::find($id);
+
+        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg]);
     }
 }

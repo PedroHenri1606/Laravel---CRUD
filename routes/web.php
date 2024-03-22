@@ -58,7 +58,10 @@ Route::middleware('autenticacao:padrao,pedro') // Apos atribuir um apelido ao Mi
             ->name('app.fornecedor.adicionar');
 
         Route::post('/fornecedor/adicionar', [\App\Http\Controllers\FornecedorController::class, 'adicionar'])
-            ->name('app.fornecedor.adicionar');    
+            ->name('app.fornecedor.adicionar');
+
+        Route::get('/fornecedor/editar/{id}/{msg?}', [\App\Http\Controllers\FornecedorController::class, 'editar'])
+            ->name('app.fornecedor.editar');    
 
         
 
