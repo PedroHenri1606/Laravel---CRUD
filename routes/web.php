@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdutoDetalheController;
 use App\Http\Middleware\AutenticacaoMiddleware;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -71,10 +72,9 @@ Route::middleware('autenticacao:padrao,pedro') // Apos atribuir um apelido ao Mi
         Route::get('/fornecedor/excluir/{id}', [\App\Http\Controllers\FornecedorController::class, 'excluir'])
             ->name('app.fornecedor.excluir');
 
-        
-
         Route::resource('produto', ProdutoController::class);
         
+        Route::resource('produto-detalhe', ProdutoDetalheController::class);
 });
 
 Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class, 'teste'])

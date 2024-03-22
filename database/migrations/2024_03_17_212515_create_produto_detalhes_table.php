@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('produto_id');
             $table->decimal('comprimento',8,2);
             $table->decimal('altura', 8,2);
+            $table->decimal('largura', 8,2);
 
             //constraint  Relacionamento de UM para UM
             $table->foreign('produto_id')->references('id')->on('produtos');
