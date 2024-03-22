@@ -3,6 +3,8 @@
 use App\Http\Middleware\AutenticacaoMiddleware;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdutoController;
+
 
 /*Comando de endereçamento de rotas 
     Get = Tipo de requisição
@@ -64,12 +66,15 @@ Route::middleware('autenticacao:padrao,pedro') // Apos atribuir um apelido ao Mi
             ->name('app.fornecedor.adicionar');
 
         Route::get('/fornecedor/editar/{id}/{msg?}', [\App\Http\Controllers\FornecedorController::class, 'editar'])
-            ->name('app.fornecedor.editar');    
+            ->name('app.fornecedor.editar');
+            
+        Route::get('/fornecedor/excluir/{id}', [\App\Http\Controllers\FornecedorController::class, 'excluir'])
+            ->name('app.fornecedor.excluir');
 
         
 
-        Route::get('/produto', [\App\Http\Controllers\ProdutoController::class, 'index'])
-            ->name('app.produto');
+        Route::resource('produto', ProdutoController::class);
+        
 });
 
 Route::get('/teste/{p1}/{p2}', [\App\Http\Controllers\TesteController::class, 'teste'])

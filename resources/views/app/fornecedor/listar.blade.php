@@ -37,7 +37,7 @@
                                     <th>{{ $fornecedor->site }}</th>
                                     <th>{{ $fornecedor->uf }}</th>
                                     <th>{{ $fornecedor->email }}</th>
-                                    <th><a href="">Excluir</a></th>
+                                    <th><a href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}">Excluir</a></th>
                                     <th><a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}">Editar</a></th>
                                 </tr>
                             @endforeach
@@ -45,6 +45,8 @@
                     </table>
                     <div class="pagination">
                         {{ $fornecedores->appends($request)->links()}}
+                            <br>
+                        {{ $fornecedores->total()}}
                     </div>
                 </div>
             </div>  
