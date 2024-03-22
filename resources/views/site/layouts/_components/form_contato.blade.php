@@ -1,5 +1,6 @@
 <form action={{ route('contato')}} method="post">
     @csrf  {{-- Comando usado para gerar token CSRF, criando uma barreira de segurança que evita ataques CSRF a aplicação--}}
+        
         <input name ="nome" value="{{old('nome')}}" type="text" placeholder="Nome" class="{{ $classe }}"> 
             @if($errors->has('nome'))
                 {{ $errors->first('nome')}}  {{-- Utilziando operador if convencional --}}
@@ -22,7 +23,7 @@
         </select>
             {{ $errors->has('motivo_contatos_id') ? $errors->first('motivo_contatos_id') : ''}}  
         <br>
-        
+
         <textarea name ="mensagem" class="{{ $classe }}"> {{ (old('mensagem') !=  '') ? old('mensagem') : 'Preencha aqui a sua mensagem'}} </textarea>
             {{ $errors->has('mensagem') ? $errors->first('mensagem') : ''}}  
         <br>

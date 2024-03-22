@@ -3,7 +3,7 @@
     @section('titulo', 'Fornecedor')
 
     @section('conteudo')
-        
+    
         <div class = "conteudo-pagina">
             <div class = "titulo-pagina2">
                 <p>Fornecedor - Listar</p>
@@ -43,6 +43,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{ $fornecedores->appends($request)->links()}}
+                    </div>
                 </div>
             </div>  
         </div>

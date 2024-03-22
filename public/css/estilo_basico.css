@@ -194,3 +194,13 @@ button:hover {
 .redes-sociais img {
     margin: 0px 15px 0px 15px;
 }
+
+.pagination path{
+    width: 30px;
+    height: 30px;
+}
+
+.pagination svg{
+    width: 50px;
+    height: 30px;
+}
