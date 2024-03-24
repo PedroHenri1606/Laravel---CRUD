@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
 use App\Models\Produto;
@@ -15,6 +16,19 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $produtos = Produto::paginate(10);
+
+        /* Metodo para a impressão dos dados de produtoDetalhe, sem utilizar o Eloquent ORM hasOne no model Produto 
+        foreach ($produtos as $indice => $produto){
+            $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+
+            if(isset($produtoDetalhe)){
+
+                $produtos[$indice]['comprimento'] = $produtoDetalhe->comprimento;
+                $produtos[$indice]['largura'] = $produtoDetalhe->largura;
+                $produtos[$indice]['altura'] = $produtoDetalhe->altura;
+            } 
+        }
+        */
 
         return view('app.produto.index', ['produtos'=> $produtos, 'request' => $request->all()]);
     }
