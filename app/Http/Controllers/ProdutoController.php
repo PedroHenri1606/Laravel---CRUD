@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $produtos = Produto::paginate(10);
+        $produtos = Item::with(['itemDetalhe'])->paginate(10); //Mudando de Lazy Loading para Eager Loading utilizando o metodo with- Carregamento Ansisoso
 
         /* Metodo para a impressão dos dados de produtoDetalhe, sem utilizar o Eloquent ORM hasOne no model Produto 
         foreach ($produtos as $indice => $produto){
